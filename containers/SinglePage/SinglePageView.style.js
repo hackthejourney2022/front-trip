@@ -9,6 +9,10 @@ const SinglePageWrapper = styled.div`
   }
 `;
 
+export const HTitle = styled.h2`
+  font-weight: 700;
+`;
+
 export const LocationMeta = styled.div`
   color: ${themeGet('text.1', '#909090')};
   font-size: 13px;

@@ -19,8 +19,8 @@ import { SearchContext } from '../../../context/SearchProvider';
 
 const calendarItem = {
   separator: '-',
-  format: 'MM-DD-YYYY',
-  locale: 'en',
+  format: 'DD-MM-YYYY',
+  locale: 'pt-BR',
 };
 
 const SearchForm = () => {
@@ -34,13 +34,6 @@ const SearchForm = () => {
     room: 0,
     guest: 0,
   });
-
-  const handleUpdate = (event) => {
-    const { searchedPlaceAPIData } = event;
-    if (!isEmpty(searchedPlaceAPIData)) {
-      setMapValue(searchedPlaceAPIData);
-    }
-  };
 
   const handleIncrement = (type) => {
     setRoomGuest({

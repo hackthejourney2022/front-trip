@@ -212,7 +212,7 @@ const FilterDrawer = (props) => {
   return (
     <FilterArea>
       <Button className={toggle ? 'active' : ''} onClick={handleToggleDrawer}>
-        More filters
+        Mais Filtros
       </Button>
       <Drawer
         className="filter_drawer"
@@ -230,7 +230,7 @@ const FilterDrawer = (props) => {
             <AccordionItem>
               <AccordionItemHeading>
                 <AccordionItemButton>
-                  <Heading as="h4" content="Amenities" />
+                  <Heading as="h4" content="Facilidades" />
                   <IoIosArrowDown />
                 </AccordionItemButton>
               </AccordionItemHeading>
@@ -242,52 +242,12 @@ const FilterDrawer = (props) => {
                 />
               </AccordionItemPanel>
             </AccordionItem>
-            {/* End of amenities filter element */}
-
-            {/* Start property type filter element */}
-            <AccordionItem>
-              <AccordionItemHeading>
-                <AccordionItemButton>
-                  <Heading as="h4" content="Property Type" />
-                  <IoIosArrowDown />
-                </AccordionItemButton>
-              </AccordionItemHeading>
-              <AccordionItemPanel>
-                <Checkbox.Group
-                  options={getPropertyType.options}
-                  value={current.property}
-                  onChange={(value) => onChange(value, 'property')}
-                />
-              </AccordionItemPanel>
-            </AccordionItem>
-            {/* End of property type filter element */}
-
-            {/* Start price range filter element */}
-            <AccordionItem>
-              <AccordionItemHeading>
-                <AccordionItemButton>
-                  <Heading as="h4" content="Select Price Range" />
-                  <IoIosArrowDown />
-                </AccordionItemButton>
-              </AccordionItemHeading>
-              <AccordionItemPanel>
-                <Slider
-                  range
-                  marks={priceInit}
-                  min={0}
-                  max={100}
-                  defaultValue={[current.minPrice, current.maxPrice]}
-                  onAfterChange={(value) => onChange(value, 'price')}
-                />
-              </AccordionItemPanel>
-            </AccordionItem>
-            {/* End of price range filter element */}
 
             {/* Start date filter element */}
             <AccordionItem>
               <AccordionItemHeading>
                 <AccordionItemButton>
-                  <Heading as="h4" content="Choose Date" />
+                  <Heading as="h4" content="Escolher Data" />
                   <IoIosArrowDown />
                 </AccordionItemButton>
               </AccordionItemHeading>

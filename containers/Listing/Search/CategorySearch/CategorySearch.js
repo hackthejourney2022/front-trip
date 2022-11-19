@@ -2,21 +2,16 @@ import React, { useState, useContext, useReducer } from 'react';
 import moment from 'moment';
 import { createBrowserHistory } from 'history';
 import ViewWithPopup from 'components/UI/ViewWithPopup/ViewWithPopup';
-import { Slider, Button, Checkbox } from 'antd';
-import InputIncDec from 'components/UI/InputIncDec/InputIncDec';
+import { Button, Checkbox } from 'antd';
 import DateRangePickerBox from 'components/UI/DatePicker/ReactDates';
 import { SearchContext } from 'context/SearchProvider';
 import { setStateToUrl } from 'library/helpers/url-handler';
 import {
-  priceInit,
   calenderItem,
-  getAmenities,
-  getPropertyType,
+  getAmenities
 } from '../SearchParams';
 import CategroySearchWrapper, {
-  RoomGuestWrapper,
-  ItemWrapper,
-  ActionWrapper,
+  TitleGuestWrapper, SubTitleGuestWrapper
 } from './CategorySearch.style';
 
 const history = process.browser ? createBrowserHistory() : false;
@@ -175,19 +170,19 @@ const CategorySearchNext = (props) => {
 
   const dateRangeActivateClass =
     current &&
-    current.setStartDate !== undefined &&
-    current.setEndDate !== undefined &&
-    current.setStartDate !== null &&
-    current.setEndDate !== null
+      current.setStartDate !== undefined &&
+      current.setEndDate !== undefined &&
+      current.setStartDate !== null &&
+      current.setEndDate !== null
       ? 'activated'
       : '';
 
   const priceRangeActivateClass =
     current &&
-    current.minPrice !== undefined &&
-    current.maxPrice !== undefined &&
-    current.minPrice === 0 &&
-    current.maxPrice === 100
+      current.minPrice !== undefined &&
+      current.maxPrice !== undefined &&
+      current.minPrice === 0 &&
+      current.maxPrice === 100
       ? ''
       : 'activated';
 
@@ -212,8 +207,11 @@ const CategorySearchNext = (props) => {
     propertyLength = current.property.length;
   }
 
-  return (
+  return (<>
+    <TitleGuestWrapper>Nossas recomendações</TitleGuestWrapper>
+    <SubTitleGuestWrapper> Dê uma olhada no que te recomendamos:</SubTitleGuestWrapper>
     <CategroySearchWrapper>
+
       <ViewWithPopup
         className={amenitiesLength ? 'activated' : ''}
         key={getAmenities.id}
@@ -234,29 +232,10 @@ const CategorySearchNext = (props) => {
       />
 
       <ViewWithPopup
-        className={propertyLength ? 'activated' : ''}
-        key={getPropertyType.id}
-        noView={true}
-        view={
-          <Button type="default">
-            {getPropertyType.name}
-            {propertyLength > 0 && `: ${propertyLength}`}
-          </Button>
-        }
-        popup={
-          <Checkbox.Group
-            options={getPropertyType.options}
-            defaultValue={property}
-            onChange={(value) => onChange(value, 'property')}
-          />
-        }
-      />
-
-      <ViewWithPopup
         className={dateRangeActivateClass}
         key={400}
         noView={true}
-        view={<Button type="default">Choose Date</Button>}
+        view={<Button type="default">Escolher Data</Button>}
         popup={
           <DateRangePickerBox
             startDateId="startDate-id-category"
@@ -279,94 +258,8 @@ const CategorySearchNext = (props) => {
         }
       />
 
-      <ViewWithPopup
-        className={priceRangeActivateClass}
-        key={300}
-        noView={true}
-        view={
-          <Button type="default">
-            {current.minPrice > 0 || current.maxPrice < 100
-              ? `Price Range: ${current.minPrice}, ${current.maxPrice}`
-              : `Price per night`}
-          </Button>
-        }
-        popup={
-          <Slider
-            range
-            marks={priceInit}
-            min={0}
-            max={100}
-            defaultValue={[current.minPrice, current.maxPrice]}
-            onAfterChange={(value) => onChange(value, 'price')}
-          />
-        }
-      />
-
-      <ViewWithPopup
-        key={200}
-        noView={true}
-        className={countRoom || countGuest ? 'activated' : ''}
-        view={
-          <Button type="default">
-            Room {countRoom > 0 && `: ${countRoom}`}, Guest
-            {countGuest > 0 && `: ${countGuest}`}
-          </Button>
-        }
-        popup={
-          <RoomGuestWrapper>
-            <ItemWrapper>
-              <strong>Room</strong>
-              <InputIncDec
-                id="room"
-                increment={() => setRoom((countRoom) => countRoom + 1)}
-                decrement={() =>
-                  setRoom((countRoom) => countRoom > 0 && countRoom - 1)
-                }
-                onChange={(e) => setRoom(e.target.value)}
-                value={countRoom}
-              />
-            </ItemWrapper>
-
-            <ItemWrapper>
-              <strong>Guest</strong>
-              <InputIncDec
-                id="guest"
-                increment={() => setGuest((countGuest) => countGuest + 1)}
-                decrement={() =>
-                  setGuest((countGuest) => countGuest > 0 && countGuest - 1)
-                }
-                onChange={(e) => setGuest(e.target.value)}
-                value={countGuest}
-              />
-            </ItemWrapper>
-
-            <ActionWrapper>
-              {countRoom || countGuest ? (
-                <Button type="default" onClick={handleRoomGuestCancel}>
-                  Cancel
-                </Button>
-              ) : (
-                ''
-              )}
-              <Button type="primary" onClick={handleRoomGuestApply}>
-                Apply
-              </Button>
-            </ActionWrapper>
-          </RoomGuestWrapper>
-        }
-      />
-
-      <ViewWithPopup
-        key={100}
-        noView={true}
-        view={<Button type="default">Reset</Button>}
-        popup={
-          <Button onClick={() => onChange(initialState, 'reset')}>
-            Reset Search Page URL
-          </Button>
-        }
-      />
     </CategroySearchWrapper>
+  </>
   );
 };
 

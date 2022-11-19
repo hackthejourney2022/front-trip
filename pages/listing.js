@@ -8,7 +8,6 @@ import SectionGrid from 'components/SectionGrid/SectionGrid';
 import { PostPlaceholder } from 'components/UI/ContentLoader/ContentLoader';
 import { SearchContext } from 'context/SearchProvider';
 import {
-  getData,
   paginator,
   searchedData,
   searchStateKeyCheck,
@@ -51,7 +50,7 @@ export default function ListingPage({ processedData, deviceType }) {
 
   useEffect(() => {
     const handleLoadMore = async () => {
-      const receviedData = await axios.get('https://demo2400520.mockable.io/offers?origin=SAO&departureDate=2022-12-22&oneWay=false&duration=10&maxPrice=10000')
+      const receviedData = await axios.get('http://demo9216625.mockable.io/meetingTime')
         .then(function (response) {
           // handle success
           setData(response.data)
@@ -80,7 +79,7 @@ export default function ListingPage({ processedData, deviceType }) {
   let columnWidth = LISTING_PAGE_COLUMN_WIDTH_WITHOUT_MAP;
 
   let columnCount = 'col-24';
-  console.log(data?.offers)
+
   return (
     <ListingWrapper>
       <Head>

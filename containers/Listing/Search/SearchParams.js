@@ -6,35 +6,28 @@ export const priceInit = {
 
 export const calenderItem = {
   separator: '-',
-  format: 'MM-DD-YYYY',
-  locale: 'en',
+  format: 'DD-MM-YYYY',
+  locale: 'pt-BR',
 };
 
 export const getAmenities = {
   id: 1,
-  name: 'Amenities',
+  name: 'Exibir lista por:',
   identifier: 'amenities',
   options: [
-    { label: 'Free Wi-Fi', value: 'free-wifi' },
-    { label: 'Free Parking', value: 'free-parking' },
-    { label: 'Breakfast included', value: 'breakfast' },
-    { label: 'Pool', value: 'pool' },
-    { label: 'Air Conditioning', value: 'air-condition' },
-    { label: 'Hot Shower', value: 'hot-shower' },
-    { label: 'Cable TV', value: 'cable-tv' },
+    { label: 'Recomendações para mim', value: 'rc' },
+    { label: 'Onde nossos nômades estão', value: 'ns' },
   ],
 };
 
 export const getPropertyType = {
   id: 2,
-  name: 'Property Type',
+  name: 'Tipo de Acomodação',
   identifier: 'property-type',
   options: [
     { label: 'Villa', value: 'villa' },
     { label: 'Hotel', value: 'hotel' },
     { label: 'Resort', value: 'resort' },
-    { label: 'Cottage', value: 'cottage' },
-    { label: 'Duplex', value: 'duplex' },
-    { label: 'Landscape', value: 'landscape' },
+    { label: 'Hostel', value: 'landscape' },
   ],
 };

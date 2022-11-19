@@ -6,8 +6,8 @@ import { ReactDatesStyleWrapper } from './ReactDates.style';
 /*
  * For Localization enable this code [example : French language as "fr"]
  */
-// import moment from 'moment';
-// import 'moment/locale/fr';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 class DateRangePickerBox extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class DateRangePickerBox extends Component {
     /*
      * For Localization enable this code [example : French language as "fr"]
      */
-    // moment.locale('fr');
+    moment.locale('pt-br');
   }
 
   onDateChangeFunc = ({ startDate, endDate }) => {

@@ -8,8 +8,16 @@ const ReservationFormWrapper = styled.form`
   }
 `;
 
+export const TextCut = styled.span`
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 300px;
+    display: block;
+    overflow: hidden
+`;
+
 export const FieldWrapper = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   @media (max-width: 375px) {
     margin-bottom: 25px;
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import GridCardWrapper, {
   ImageWrapper,
@@ -24,9 +24,20 @@ const GridCard = ({
   children,
   departureDate,
   returnDate,
-  to
+  to,
+  item
 }) => {
+  const [localStorageSave, setLocalStorage] = useState(item);
   let classes = viewDetailsBtn || editBtn ? `has_btn ${className}` : className;
+
+
+  const clickSaveLocalStorage = () => {
+    if (window && typeof localStorage !== 'undefined') {
+      localStorage.setItem('data', JSON.stringify(localStorageSave));
+    }
+  };
+
+
   return (
     <GridCardWrapper className={`grid_card ${classes}`.trim()}>
       <ImageWrapper className="media_wrapper">{children}</ImageWrapper>
@@ -40,7 +51,12 @@ const GridCard = ({
           {returnDate && <LocationArea>{returnDate}</LocationArea>}
           {price && <PriceArea className="price">{price}</PriceArea>}
           {viewDetailsBtn || editBtn ? (
-            <ButtonGroup className="button_group">
+            <ButtonGroup className="button_group" onClick={() => {
+
+              setLocalStorage(item)
+              clickSaveLocalStorage()
+
+            }}>
               {viewDetailsBtn}
               {editBtn}
             </ButtonGroup>

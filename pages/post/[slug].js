@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import isEmpty from 'lodash/isEmpty';
 import Sticky from 'react-stickynode';
 import { Row, Col, Modal, Button } from 'antd';
@@ -9,31 +8,30 @@ import Loader from 'components/Loader/Loader';
 import { getDeviceType } from 'library/helpers/get-device-type';
 import { getAPIData, processAPIData } from 'library/helpers/get-api-data';
 import Description from 'containers/SinglePage/Description/Description';
-import Amenities from 'containers/SinglePage/Amenities/Amenities';
 import Location from 'containers/SinglePage/Location/Location';
 import Review from 'containers/SinglePage/Review/Review';
 import Reservation from 'containers/SinglePage/Reservation/Reservation';
 import BottomReservation from 'containers/SinglePage/Reservation/BottomReservation';
 import TopBar from 'containers/SinglePage/TopBar/TopBar';
+import Card from 'components/UI/Card/Card';
+import { FaTimesCircle, FaExclamationTriangle, FaFileContract, FaFileAlt } from 'react-icons/fa';
 import SinglePageWrapper, {
-  PostImage,
+  HTitle,
 } from 'containers/SinglePage/SinglePageView.style';
 import PostImageGallery from 'containers/SinglePage/ImageGallery/ImageGallery';
+import Link from 'next/link';
+import axios from 'axios';
 
-export default function SinglePostPage({ processedData, deviceType, query }) {
+export default function SinglePostPage({ deviceType, query }) {
   const [href, setHref] = useState('');
   const [isModalShowing, setIsModalShowing] = useState(false);
-  if (isEmpty(processedData)) return <Loader />;
+  const [data, setData] = useState();
   const {
-    reviews,
     rating,
     ratingCount,
     price,
     title,
     gallery,
-    location,
-    content,
-    amenities,
     author,
   } = processedData[0];
   const pageTitle =
@@ -45,43 +43,76 @@ export default function SinglePostPage({ processedData, deviceType, query }) {
     setHref(path);
   }, [setHref]);
 
+  useEffect(() => {
+    if (window && typeof localStorage !== 'undefined') {
+      const retrievedObject = localStorage.getItem('data');
+      setData(JSON.parse(retrievedObject))
+    }
+  }, []);
+
+  const payload = {
+    originLocationCode: "SAO",
+    destinationLocationCode: data?.to,
+    departureDate: data?.departureDate,
+    returnDate: data?.returnDate,
+    adults: 1
+  }
+
+  useEffect(() => {
+    const getFlights = async () => {
+      const receviedData = await axios.post('/shopping/flights', payload)
+        .then(function (response) {
+          // handle success
+          console.log(response.data)
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+    }
+    getFlights()
+  }, []);
+  if (isEmpty(data)) return <Loader />;
+  console.log(data);
   return (
+
     <>
       <Head>
         <title>{pageTitle} | #Partiu</title>
       </Head>
       <SinglePageWrapper>
-        <PostImage>
-          <Image
-            src="/images/single-post-bg.jpg"
-            layout="fill"
-            objectFit="cover"
-            alt="Listing details banner"
-          />
-
-          <Button
-            type="primary"
-            onClick={() => setIsModalShowing(true)}
-            className="image_gallery_button"
-          >
-            View Photos
-          </Button>
-        </PostImage>
-
         <TopBar title={title} shareURL={href} author={author} media={gallery} />
-
         <Container>
           <Row gutter={30} id="reviewSection" style={{ marginTop: 30 }}>
             <Col xl={16}>
               <Description
-                content={content}
-                title={title}
-                location={location}
-                rating={rating}
-                ratingCount={ratingCount}
+                content={data?.description}
+                title={data?.to}
+                location={data?.destination}
+                rating={data?.scores.reviews.overallScore
+                }
+                ratingCount={data?.scores.reviews.details.length}
               />
-              <Amenities amenities={amenities} />
+
               <Location location={processedData[0]} />
+              <Row>
+                <Col xl={12}>
+                  <Card>
+                    <Card title='Restrições' header={<span><FaExclamationTriangle /> Restrições</span>} children={<p>Restrições de entrada no país.<Link href={'#'}> Veja mais</Link></p>}></Card>
+                    <Card title='Documentos de Saúde' header={<span><FaFileContract /> Documentos de Saúde</span>} children={<p>Declarações e formulários de saúde obrigatórios.  <Link href={'#'}>Veja mais</Link></p>}></Card>
+                  </Card>
+                </Col>
+                <Col xl={12}>
+                  <Card>
+                    <Card title='Teste de COVID' header={<span><FaFileAlt /> Teste de COVID</span>} children={<p>Apresentação de teste de COVID-19 obrigatória no desemparque. <Link href={'#'}>Veja mais</Link></p>}></Card>
+                    <Card title='Politica de Quarentena' header={<span><FaTimesCircle /> Politica de Quarentena</span>} children={<p>Obrigatório a quarentena de 14 dias. <Link href={'#'}>Veja mais</Link></p>}></Card>
+                  </Card>
+                </Col>
+              </Row>
+
             </Col>
             <Col xl={8}>
               {deviceType === 'desktop' ? (
@@ -91,7 +122,9 @@ export default function SinglePostPage({ processedData, deviceType, query }) {
                   top={202}
                   bottomBoundary="#reviewSection"
                 >
-                  <Reservation />
+
+                  <HTitle>Visite e apoie uma ONG local:</HTitle>
+                  <Reservation data={data} />
                 </Sticky>
               ) : (
                 <BottomReservation
@@ -106,15 +139,15 @@ export default function SinglePostPage({ processedData, deviceType, query }) {
           <Row gutter={30}>
             <Col xl={16}>
               <Review
-                reviews={reviews}
-                ratingCount={ratingCount}
-                rating={rating}
+                reviews={data?.scores}
+                ratingCount={data?.scores.reviews.details.length}
+                rating={data?.scores.reviews.overallScore}
               />
             </Col>
             <Col xl={8} />
           </Row>
         </Container>
-      </SinglePageWrapper>
+      </SinglePageWrapper >
 
       <Modal
         visible={isModalShowing}
@@ -163,3 +196,21 @@ export async function getServerSideProps(context) {
     props: { query, processedData, deviceType },
   };
 }
+
+const processedData = [
+  {
+    "id": 65362,
+    "agentId": 2125,
+    "title": "Awesome Cotton Chicken",
+    "slug": "reiciendis-consequatur-dolore",
+    "content": "In South Williamsburg only a few blocks inland from the East River, Marlo &Sons is a rustic respite with nice wine, good cocktails, and excellent snacking fare such as oysters, local cheese, and potato tortilla. But thereâ€™s more: seasonal salads and soups, the famous brick chicken, a dimly lit space outfitted in various types of wood(this is an Andrew Tarlow restaurant, after all). In many ways.",
+    "status": "draft",
+    "price": "253.00",
+    "isNegotiable": true,
+    "propertyType": "Hotel",
+    "condition": "Excellent",
+    "rating": 5,
+    "ratingCount": 35,
+    "contactNumber": "1-403-000-9038 x910",
+  }
+]

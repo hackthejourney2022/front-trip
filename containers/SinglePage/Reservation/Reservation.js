@@ -1,44 +1,36 @@
 import React, { Fragment } from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Card from 'components/UI/Card/Card';
 import Heading from 'components/UI/Heading/Heading';
-import Text from 'components/UI/Text/Text';
 import RenderReservationForm from './RenderReservationForm';
 
-const CardHeader = ({ priceStyle, pricePeriodStyle, linkStyle }) => {
+const CardHeader = ({ priceStyle, values }) => {
   return (
     <Fragment>
       <Heading
         content={
           <Fragment>
-            $162 <Text as="span" content="/ night" {...pricePeriodStyle} />
+            {values.name}
           </Fragment>
         }
         {...priceStyle}
       />
-      <Link href="/#1">
-        <a style={{ ...linkStyle }}>Contact Hotel</a>
-      </Link>
     </Fragment>
   );
 };
 
-export default function Reservation({ linkStyle }) {
+export default function Reservation({ data }) {
   return (
-    <Card
-      className="reservation_sidebar"
-      header={<CardHeader />}
-      content={<RenderReservationForm />}
-      footer={
-        <p>
-          Special offers available.
-          <Link href="/#1">
-            <a style={{ ...linkStyle }}>See details</a>
-          </Link>
-        </p>
-      }
-    />
+    data?.scores.volunteering.details.map((resp, i) => {
+      return <> <Card
+        key={i}
+        className="reservation_sidebar"
+        header={<CardHeader values={resp} />}
+        content={<RenderReservationForm values={resp} />}
+      />
+        <br />
+      </>
+    })
   );
 }
 

@@ -1,13 +1,4 @@
-import fetch from 'isomorphic-unfetch';
 import shuffle from 'lodash/shuffle';
-
-const fetchAPIData = (url) => {
-  return fetch(url)
-    .then((r) => r.json())
-    .then((data) => {
-      return data;
-    });
-};
 
 export const processAPIData = (apiData) => {
   let fetchData = {};
@@ -48,13 +39,9 @@ export const paginator = (posts, processedData, limit) => {
 };
 
 export const getAPIData = async (apiUrl) => {
-  const promises = apiUrl.map(async (repo) => {
-    const apiPath = `${process.env.NEXT_PUBLIC_SERVER_API}/data`;
-    const api = `https://demo2400520.mockable.io/offers?origin=SAO&departureDate=2022-12-22&oneWay=false&duration=10&maxPrice=10000`;
-    const response = await fetchAPIData(api);
-    console.log(response);
+  const promises = apiUrl.map(async () => {
     return {
-      data: response,
+      data: ''
     };
   });
   const receviedData = await Promise.all(promises);

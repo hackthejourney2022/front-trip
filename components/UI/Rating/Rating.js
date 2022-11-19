@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { IoIosStar, IoIosStarOutline } from 'react-icons/io';
 
 const Rating = (props) => {
-  const { rating, ratingCount, type, ratingFieldName } = props;
+  const { rating, ratingCount, type, ratingFieldName, ratingTitile } = props;
   let i, floorValue;
   let ratingView = [];
   if (rating && rating !== 0) {
@@ -43,9 +43,10 @@ const Rating = (props) => {
       {type && type === 'bulk' ? (
         <>
           <span>{ratingView}</span>
-          <strong>
+
+          {!ratingTitile && <strong>
             {` ${listingCondition}`} {`${showRatingCount}`}
-          </strong>
+          </strong>}
         </>
       ) : (
         <>

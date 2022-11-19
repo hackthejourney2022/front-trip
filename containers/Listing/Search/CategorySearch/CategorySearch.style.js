@@ -122,6 +122,17 @@ export const RoomGuestWrapper = styled.div`
   }
 `;
 
+export const TitleGuestWrapper = styled.h3`
+  font-size: 26px;
+  font-weight: 700;
+`;
+
+export const SubTitleGuestWrapper = styled.h4`
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+`;
+
 export const ItemWrapper = styled.div`
   display: flex;
   align-items: center;

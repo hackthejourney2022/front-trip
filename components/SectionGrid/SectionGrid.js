@@ -61,7 +61,7 @@ export default function SectionGrid({
                   key={item.to + key}
                   {...columnStyle}
                 >
-                  <ProductCard link={link} {...item} />
+                  <ProductCard link={link} {...item} item={item} />
                 </Box>
               );
             })

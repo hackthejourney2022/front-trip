@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiExternalLink } from 'react-icons/fi';
 import Carousel from 'react-multi-carousel';
-import Rating from 'components/UI/Rating/Rating';
 import Favourite from 'components/UI/Favorite/Favorite';
 import GridCard from '../GridCard/GridCard';
 
@@ -57,10 +56,13 @@ export default function ProductCard({
   departureDate,
   returnDate,
   to,
-  scores
+  link,
+  item
 }) {
+
   return (
     <GridCard
+      item={item}
       favorite={
         <Favourite
           onClick={(event) => {
@@ -75,9 +77,9 @@ export default function ProductCard({
       departureDate={`Data de Ida: ${departureDate}`}
       returnDate={`Data Volta: ${returnDate}`}
       viewDetailsBtn={
-        <Link href={`/`} as={`/`} prefetch={false}>
+        <Link href={`${link}/[slug]`} as={`${link}/item`} prefetch={false}>
           <a>
-            <FiExternalLink /> View Details
+            <FiExternalLink /> Ver Detalhes
           </a>
         </Link>
       }

@@ -70,36 +70,34 @@ const AgentCreateOrUpdateForm = () => {
         <Row gutter={30}>
           <Col lg={12}>
             <FormControl
-              label="Email"
-              htmlFor="email"
-              error={
-                errors.email && (
-                  <>
-                    {errors.email?.type === 'required' && (
-                      <span>Este campo é obrigatório!</span>
-                    )}
-                    {errors.email?.type === 'pattern' && (
-                      <span>Por favor entre com endereço de email válido.</span>
-                    )}
-                  </>
-                )
-              }
+              label="Cidade Origem"
+              htmlFor="cidadeOrigem"
+              error={errors.cidadeOrigem && <span>Este campo é obrigatório!</span>}
             >
               <Controller
-                name="email"
+                name="cidadeOrigem"
                 defaultValue=""
                 control={control}
-                rules={{
-                  required: true,
-                  pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-                }}
+                rules={{ required: true }}
                 render={({ field: { onChange, onBlur, value } }) => (
-                  <Input
-                    type="email"
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                  />
+                  <Input onChange={onChange} onBlur={onBlur} value={value} />
+                )}
+              />
+            </FormControl>
+          </Col>
+          <Col lg={12}>
+            <FormControl
+              label="Cidade Atual"
+              htmlFor="cidadeAtual"
+              error={errors.cidadeAtual && <span>Este campo é obrigatório!</span>}
+            >
+              <Controller
+                name="cidadeAtual"
+                defaultValue=""
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <Input onChange={onChange} onBlur={onBlur} value={value} />
                 )}
               />
             </FormControl>

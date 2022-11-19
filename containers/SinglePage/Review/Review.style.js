@@ -304,6 +304,11 @@ export const ModalTitle = styled.h2`
   }
 `;
 
+export const RatingSpace = styled.div`
+  margin-right: 20px;
+`;
+
+
 export const Label = styled.h3`
   color: ${themeGet('text.0', '#2C2C2C')};
   font-size: 15px;

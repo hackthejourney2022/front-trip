@@ -1,10 +1,8 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Row, Col, Input, Rate, Checkbox, Button } from 'antd';
+import { Input, Rate, Checkbox, Button } from 'antd';
 import FormControl from 'components/UI/FormControl/FormControl';
-import RadioGroup from 'components/UI/RadioGroup/RadioGroup';
-import DragAndDropUploader from 'components/UI/ImageUploader/DragAndDropUploader';
-import { Form, Label, GroupTitle, Description } from './Review.style';
+import { Form } from './Review.style';
 
 const reviewPhotos = [
   {
@@ -46,7 +44,7 @@ export default function ReviewForm() {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormControl
-        label="Overall Rating"
+        label="Dê uma nota"
         htmlFor="ratings"
         error={errors.ratings && <span>Este campo é obrigatório!</span>}
       >
@@ -61,7 +59,7 @@ export default function ReviewForm() {
         />
       </FormControl>
       <FormControl
-        label="Title of your review"
+        label="Titulo da sua avaliação"
         htmlFor="reviewTitle"
         error={errors.reviewTitle && <span>Este campo é obrigatório!</span>}
       >
@@ -75,13 +73,13 @@ export default function ReviewForm() {
               onChange={onChange}
               onBlur={onBlur}
               value={value}
-              placeholder="Summarize your visit  or highlight an interesting details"
+              placeholder="Dê um titulo para a sua avaliação"
             />
           )}
         />
       </FormControl>
       <FormControl
-        label="Details of your review"
+        label="Detalhes da sua avaliação"
         htmlFor="reviewDetails"
         error={errors.reviewDetails && <span>Este campo é obrigatório!</span>}
       >
@@ -96,259 +94,12 @@ export default function ReviewForm() {
               onChange={onChange}
               onBlur={onBlur}
               value={value}
-              placeholder="Tell people about your experience: your room, location, amenities?"
+              placeholder="Escreva com mais detalhes sobre o local, estadia, ongs, para que outros nômades possam ver?"
             />
           )}
         />
       </FormControl>
-      <FormControl
-        label="What Sort of trip was this?"
-        htmlFor="tripType"
-        error={errors.tripType && <span>Este campo é obrigatório!</span>}
-      >
-        <Controller
-          name="tripType"
-          defaultValue=""
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <RadioGroup
-              onChange={onChange}
-              onBlur={onBlur}
-              value={value}
-              buttonStyle="solid"
-              size="large"
-              options={[
-                { label: 'Business', value: 'business' },
-                { label: 'Couples', value: 'couple' },
-                { label: 'Family', value: 'family' },
-                { label: 'Friends', value: 'friend' },
-                { label: 'Solo', value: 'solo' },
-              ]}
-            />
-          )}
-        />
-      </FormControl>
-      <FormControl className="optional-section">
-        <GroupTitle>
-          Could You Say a Little More About It? <span>(optional)</span>
-        </GroupTitle>
-        <Description>
-          We'd love your opinion ! Anything you can share will help other
-          travelers choose their perfect hotel . Thanks
-        </Description>
-      </FormControl>
-      <FormControl className="radio-group-area">
-        <Row>
-          <Col lg={8}>
-            <Label>Is this a quaint hotel?</Label>
-          </Col>
-          <Col lg={16}>
-            <Controller
-              name="quaint"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <RadioGroup
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  buttonStyle="solid"
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' },
-                    { label: 'Not Sure', value: 'not-sure' },
-                  ]}
-                />
-              )}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={8}>
-            <Label>Does this hotel offer rooms with great views?</Label>
-          </Col>
-          <Col lg={16}>
-            <Controller
-              name="roomViews"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <RadioGroup
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  buttonStyle="solid"
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' },
-                    { label: 'Not Sure', value: 'not-sure' },
-                  ]}
-                />
-              )}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={8}>
-            <Label>Does this hotel have an indoor pool?</Label>
-          </Col>
-          <Col lg={16}>
-            <Controller
-              name="indoorPool"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <RadioGroup
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  buttonStyle="solid"
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' },
-                    { label: 'Not Sure', value: 'not-sure' },
-                  ]}
-                />
-              )}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={8}>
-            <Label>Is this a trendy hotel?</Label>
-          </Col>
-          <Col lg={16}>
-            <Controller
-              name="isTrendy"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <RadioGroup
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  buttonStyle="solid"
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' },
-                    { label: 'Not Sure', value: 'not-sure' },
-                  ]}
-                />
-              )}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={8}>
-            <Label>Is this a romantic hotel?</Label>
-          </Col>
-          <Col lg={16}>
-            <Controller
-              name="isRomantic"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <RadioGroup
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  buttonStyle="solid"
-                  options={[
-                    { label: 'Yes', value: 'yes' },
-                    { label: 'No', value: 'no' },
-                    { label: 'Not Sure', value: 'not-sure' },
-                  ]}
-                />
-              )}
-            />
-          </Col>
-        </Row>
-      </FormControl>
-      <Row type="flex" justify="space-between">
-        <Col>
-          <FormControl label="Service" htmlFor="serviceRatings">
-            <Controller
-              name="serviceRatings"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Rate onChange={onChange} onBlur={onBlur} value={value} />
-              )}
-            />
-          </FormControl>
-        </Col>
-        <Col>
-          <FormControl label="Rooms" htmlFor="roomsRatings">
-            <Controller
-              name="roomsRatings"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Rate onChange={onChange} onBlur={onBlur} value={value} />
-              )}
-            />
-          </FormControl>
-        </Col>
-        <Col>
-          <FormControl label="Cleanliness" htmlFor="cleanlinessRatings">
-            <Controller
-              name="cleanlinessRatings"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Rate onChange={onChange} onBlur={onBlur} value={value} />
-              )}
-            />
-          </FormControl>
-        </Col>
-        <Col>
-          <FormControl label="Food" htmlFor="foodRatings">
-            <Controller
-              name="foodRatings"
-              defaultValue=""
-              control={control}
-              rules={{ required: true }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Rate onChange={onChange} onBlur={onBlur} value={value} />
-              )}
-            />
-          </FormControl>
-        </Col>
-      </Row>
-      <FormControl
-        label="Add a tip to help travelers choose a good room"
-        htmlFor="tips"
-      >
-        <Controller
-          name="tips"
-          defaultValue=""
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input
-              onChange={onChange}
-              onBlur={onBlur}
-              value={value}
-              placeholder="E. g. Best views, quieter floors, accessibility, etc."
-            />
-          )}
-        />
-      </FormControl>
-      <FormControl label="Do You have photos to share? (Optional)">
-        <DragAndDropUploader
-          name="reviewPhotos"
-          onUploadChange={(data) => setValue('reviewPhotos', data)}
-        />
-      </FormControl>
+
       <FormControl>
         <Controller
           control={control}
@@ -368,7 +119,7 @@ export default function ReviewForm() {
       </FormControl>
       <FormControl className="submit-container">
         <Button htmlType="submit" type="primary" size="large">
-          Submit Your Review
+          Enviar Avaliação
         </Button>
       </FormControl>
     </Form>

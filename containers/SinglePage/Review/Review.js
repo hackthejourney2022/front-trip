@@ -1,45 +1,45 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { IoIosStar, IoIosStarOutline, IoIosArrowDown } from 'react-icons/io';
-import { Row, Col, Button, Input, Checkbox, Divider, Modal } from 'antd';
-import CommentCard from 'components/UI/CommentCard/CommentCard';
+import { Row, Col, Button, Checkbox, Divider, Modal } from 'antd';
 import Heading from 'components/UI/Heading/Heading';
+import CommentCard from 'components/UI/CommentCard/CommentCard';
 import Text from 'components/UI/Text/Text';
 import ReviewForm from './ReviewForm';
+import Rating from 'components/UI/Rating/Rating';
+
 import ReviewWrapper, {
   HeaderSection,
   RatingStatus,
   FilterElement,
   RatingSearch,
   RatingWrapper,
-  TextButton,
   ModalTitle,
 } from './Review.style';
 import { Element } from 'react-scroll';
 
-const Search = Input.Search;
 const CommentBox = (props) => {
   const { reviews } = props;
   return reviews && reviews.length !== 0
-    ? reviews.map((singleReview, i) => {
+    ? [reviews]?.map((singleReview, i) => {
+      return singleReview?.reviews.details.map(((resp, i) => {
         return (
           <Fragment key={i}>
             <Divider />
-            <CommentCard singleReview={singleReview} />
+            <CommentCard singleReview={resp} />
           </Fragment>
         );
-      })
+      }))
+
+    })
     : 'No Review Found';
 };
 
 const Review = (props) => {
   const {
-    ratingCount,
     reviews,
     statusHeadingStyle,
     filterHeadingStyle,
-    ratingLabelStyle,
-    ratingCountStyle,
+    ratingLabelStyle
   } = props;
 
   const [state, setState] = useState({
@@ -62,22 +62,14 @@ const Review = (props) => {
         <HeaderSection>
           <RatingStatus>
             <Heading
-              content={`${ratingCount} Reviews`}
+              content={`${reviews?.reviews.details.length} Avaliações`}
               {...statusHeadingStyle}
             />
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
+            <Rating rating={reviews?.reviews.overallScore} ratingCount={reviews?.reviews.details.length} ratingTitile type="bulk" />
           </RatingStatus>
           <RatingSearch>
-            <Search
-              placeholder="Search reviews"
-              onSearch={(value) => console.log(value)}
-            />
             <Button type="primary" onClick={() => handleModalOpen('review')}>
-              Write a Review
+              Escreva uma Avaliação
             </Button>
             <Modal
               visible={state.review}
@@ -87,251 +79,82 @@ const Review = (props) => {
               maskStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
               wrapClassName="review_modal"
             >
-              <ModalTitle>Write your review here</ModalTitle>
+              <ModalTitle>Escreve sua avaliação</ModalTitle>
               <ReviewForm />
             </Modal>
           </RatingSearch>
         </HeaderSection>
         <Row gutter={20}>
           <Col sm={12} lg={9}>
-            <Heading content="Traveler Ratings" {...filterHeadingStyle} />
+            <Heading content="Atrações" {...filterHeadingStyle} />
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Exccellent" as="span" {...ratingLabelStyle} />
-                <RatingWrapper>
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <Text content="172" as="span" {...ratingCountStyle} />
-                </RatingWrapper>
-              </Checkbox>
+              <Text content="Vida Noturna" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.attractions.details.nightLife} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Very Good" as="span" {...ratingLabelStyle} />
-                <RatingWrapper>
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarOutline />
-                  <Text content="92" as="span" {...ratingCountStyle} />
-                </RatingWrapper>
-              </Checkbox>
+              <Text content="Restaurantes" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.attractions.details.restaurant} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Average" as="span" {...ratingLabelStyle} />
-                <RatingWrapper>
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarOutline />
-                  <IoIosStarOutline />
-                  <Text content="34" as="span" {...ratingCountStyle} />
-                </RatingWrapper>
-              </Checkbox>
+              <Text content="Shopping" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.attractions.details.shopping} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Poor" as="span" {...ratingLabelStyle} />
-                <RatingWrapper>
-                  <IoIosStar />
-                  <IoIosStar />
-                  <IoIosStarOutline />
-                  <IoIosStarOutline />
-                  <IoIosStarOutline />
-                  <Text content="11" as="span" {...ratingCountStyle} />
-                </RatingWrapper>
-              </Checkbox>
+              <Text content="Vegetariano" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.attractions.details.vegetarian} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
           </Col>
-
-          <Col sm={12} lg={5}>
-            <Heading content="Traveler Type" {...filterHeadingStyle} />
+          <Col sm={12} lg={9}>
+            <Heading content="Segurança" {...filterHeadingStyle} />
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Families" as="span" {...ratingLabelStyle} />
-              </Checkbox>
+              <Text content="LGBTQIA+" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.security.details.lgbtq} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Couples" as="span" {...ratingLabelStyle} />
-              </Checkbox>
+              <Text content="Hospital" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.security.details.medical} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Solo" as="span" {...ratingLabelStyle} />
-              </Checkbox>
+              <Text content="Segurança Pública" as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.security.details.lgbtq} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
 
             <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Business" as="span" {...ratingLabelStyle} />
-              </Checkbox>
+              <Text content="Liberdade Política " as="span" {...ratingLabelStyle} />
+              <RatingWrapper>
+                <Rating rating={reviews?.security.details.politicalFreedom} ratingTitile type="bulk" />
+              </RatingWrapper>
             </FilterElement>
             {/* End of Filter Element */}
-          </Col>
-
-          <Col sm={12} lg={5}>
-            <Heading content="Time Of Year" {...filterHeadingStyle} />
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Jan-Mar" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Apr-Jun" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Jul-Sep" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Oct-Dec" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-          </Col>
-
-          <Col sm={12} lg={5}>
-            <Heading content="Languages" {...filterHeadingStyle} />
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="All Languages" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="English" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <FilterElement>
-              <Checkbox onChange={onChange}>
-                <Text content="Spanish" as="span" {...ratingLabelStyle} />
-              </Checkbox>
-            </FilterElement>
-            {/* End of Filter Element */}
-
-            <TextButton onClick={() => handleModalOpen('language')}>
-              More Language <IoIosArrowDown />
-            </TextButton>
-
-            <Modal
-              width={320}
-              visible={state.language}
-              onCancel={() => handleModalClose('language')}
-              footer={null}
-              maskStyle={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}
-              wrapClassName="language_modal"
-            >
-              <Heading content="Languages" {...filterHeadingStyle} />
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text
-                    content="All Languages"
-                    as="span"
-                    {...ratingLabelStyle}
-                  />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="English" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text
-                    content="Chinese (Sim.)"
-                    as="span"
-                    {...ratingLabelStyle}
-                  />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text
-                    content="Chinese (Trad.)"
-                    as="span"
-                    {...ratingLabelStyle}
-                  />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="Spanish" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="German" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="Italian" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="French" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-
-              <FilterElement>
-                <Checkbox onChange={onChange}>
-                  <Text content="Russian" as="span" {...ratingLabelStyle} />
-                </Checkbox>
-              </FilterElement>
-              {/* End of Filter Element */}
-            </Modal>
-            {/* End of Text Button */}
           </Col>
         </Row>
+
         <CommentBox reviews={reviews} />
       </ReviewWrapper>
     </Element>
