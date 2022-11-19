@@ -50,7 +50,7 @@ export default function ListingPage({ processedData, deviceType }) {
 
   useEffect(() => {
     const handleLoadMore = async () => {
-      const receviedData = await axios.get('http://demo9216625.mockable.io/meetingTime')
+      const receviedData = await axios.get('http://107.21.156.10:3000/recommendation/flight?origin=SAO&departureDate=2022-12-20&oneWay=true')
         .then(function (response) {
           // handle success
           setData(response.data)
@@ -114,15 +114,5 @@ export default function ListingPage({ processedData, deviceType }) {
 
 export async function getServerSideProps(context) {
   const { req } = context;
-  const apiUrl = [
-    {
-      endpoint: 'https://demo2400520.mockable.io/offers?origin=SAO&departureDate=2022-12-22&oneWay=false&duration=10&maxPrice=10000'
-    },
-  ];
-  const pageData = [{}];
-  const processedData = processAPIData(pageData);
-  const deviceType = getDeviceType(req);
-  return {
-    props: { processedData, deviceType },
-  };
+  return;
 }

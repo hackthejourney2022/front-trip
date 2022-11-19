@@ -26,6 +26,7 @@ export default function SinglePostPage({ deviceType, query }) {
   const [href, setHref] = useState('');
   const [isModalShowing, setIsModalShowing] = useState(false);
   const [data, setData] = useState();
+  const [flights, setFlights] = useState();
   const {
     rating,
     ratingCount,
@@ -46,37 +47,39 @@ export default function SinglePostPage({ deviceType, query }) {
   useEffect(() => {
     if (window && typeof localStorage !== 'undefined') {
       const retrievedObject = localStorage.getItem('data');
-      setData(JSON.parse(retrievedObject))
+      const dataParse = JSON.parse(retrievedObject);
+      setData(dataParse)
+      const payload = {
+        originLocationCode: "SAO",
+        destinationLocationCode: dataParse?.to,
+        departureDate: dataParse?.departureDate,
+        returnDate: dataParse?.returnDate,
+        adults: 1
+      }
+      getFlights(payload)
     }
   }, []);
 
-  const payload = {
-    originLocationCode: "SAO",
-    destinationLocationCode: data?.to,
-    departureDate: data?.departureDate,
-    returnDate: data?.returnDate,
-    adults: 1
+
+
+
+  const getFlights = async (payload) => {
+    const receviedData = await axios.post('http://107.21.156.10:3000/shopping/summary-flights', payload)
+      .then(function (response) {
+        // handle success
+        setFlights(response.data)
+      })
+      .catch(function (error) {
+        //  handle error
+        console.log(error);
+      })
+      .finally(function () {
+        //  always executed
+      });
   }
 
-  useEffect(() => {
-    const getFlights = async () => {
-      const receviedData = await axios.post('/shopping/flights', payload)
-        .then(function (response) {
-          // handle success
-          console.log(response.data)
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
-    }
-    getFlights()
-  }, []);
+
   if (isEmpty(data)) return <Loader />;
-  console.log(data);
   return (
 
     <>
@@ -96,6 +99,24 @@ export default function SinglePostPage({ deviceType, query }) {
                 }
                 ratingCount={data?.scores.reviews.details.length}
               />
+
+              <Row gutter={30}>
+                <HTitle>Opções de Voo:</HTitle>
+
+                <Col xl={24}>
+                  {flights.map((resp, index) => {
+                    return <Card>
+                      <Row>
+                        <Col xl={6}>De: {resp.from} Para: </Col>
+                        <Col xl={6}>a</Col>
+                        <Col xl={6}>a</Col>
+                        <Col xl={6}>a</Col>
+                      </Row>
+                    </Card>
+                  })}
+
+                </Col>
+              </Row>
 
               <Location location={processedData[0]} />
               <Row>

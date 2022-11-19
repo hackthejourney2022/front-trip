@@ -34,15 +34,15 @@ const responsive = {
 };
 
 const gallery = [{
-  url: 'http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png',
+  url: '/images/city-1.jpg',
   title: 'teste'
 },
 {
-  url: 'http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png',
+  url: '/images/city-2.jpg',
   title: 'teste'
 },
 {
-  url: 'http://s3.amazonaws.com/redqteam.com/isomorphic-reloaded-image/profilepic.png',
+  url: '/images/city-3.jpg',
   title: 'teste'
 }]
 
@@ -57,7 +57,8 @@ export default function ProductCard({
   returnDate,
   to,
   link,
-  item
+  item,
+  numberItem
 }) {
 
   return (
@@ -101,15 +102,14 @@ export default function ProductCard({
         sliderClass=""
         slidesToSlide={1}
       >
-        {gallery.map(({ url, title }, index) => (
-          <Image
-            key={index}
-            src={url}
-            alt={title}
-            layout="fill"
-            objectFit="cover"
-          />
-        ))}
+
+        <Image
+          src={gallery[numberItem].url}
+          alt={gallery[numberItem].title}
+          layout="fill"
+          objectFit="cover"
+        />
+
       </Carousel>
     </GridCard>
   );
