@@ -57,9 +57,9 @@ Na tela de login o nomade poderá criar seu acesso de forma gratuita e simples v
 
 ## Personalização
 Na tela de personalização iremos captar todas as preferencias necessárias do nomade a fim de conseguirmos tornar sua experiência relevante, considerando em nossas buscas e recomendações aquilo que realmente importa para ele. As personalizações podem ser descritas em 3 grupos, sendo eles:
-> Segurança
-> Comodidades / Atrações
-> Voluntariado
+- Segurança
+- Comodidades / Atrações
+- Voluntariado
 
 ## Recomendações
 Na tela de recomendações são apresentada a lista de todas as opções de destinos ordenadas pela relevância considerando as preferencias do nomade, bem como informações relevantes do destino e a melhor data para viajar considerando o preço.
