@@ -14,6 +14,7 @@ import Reservation from 'containers/SinglePage/Reservation/Reservation';
 import BottomReservation from 'containers/SinglePage/Reservation/BottomReservation';
 import TopBar from 'containers/SinglePage/TopBar/TopBar';
 import Card from 'components/UI/Card/Card';
+import moment from 'moment';
 import { FaTimesCircle, FaExclamationTriangle, FaFileContract, FaFileAlt } from 'react-icons/fa';
 import SinglePageWrapper, {
   HTitle,
@@ -102,20 +103,27 @@ export default function SinglePostPage({ deviceType, query }) {
 
               <Row gutter={30}>
                 <HTitle>Opções de Voo:</HTitle>
+                {flights ?
+                  <Col xl={24}>
+                    {flights?.map((resp, index) => {
+                      return <Card key={index}>
+                        <Row>
+                          <Col xl={6}>De: {resp.itinerary.from} Para: {resp.itinerary.to}</Col>
+                          <Col xl={6}>Preço: R$ {resp.price}</Col>
+                          <Col xl={6}>Cia: {resp.airline}</Col>
+                          <Col xl={6}>
+                            <span>Ida: {moment(resp.itinerary.departureDate).format(
+                              "DD/MM/YYYY"
+                            )}</span>
+                            <br />
+                            <span>Volta: {moment(resp.itinerary.returnDate).format(
+                              "DD/MM/YYYY"
+                            )}</span>  </Col>
+                        </Row>
+                      </Card>
+                    })}
 
-                <Col xl={24}>
-                  {flights.map((resp, index) => {
-                    return <Card>
-                      <Row>
-                        <Col xl={6}>De: {resp.from} Para: </Col>
-                        <Col xl={6}>a</Col>
-                        <Col xl={6}>a</Col>
-                        <Col xl={6}>a</Col>
-                      </Row>
-                    </Card>
-                  })}
-
-                </Col>
+                  </Col> : <Loader />}
               </Row>
 
               <Location location={processedData[0]} />

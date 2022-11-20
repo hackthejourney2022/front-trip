@@ -114,5 +114,11 @@ export default function ListingPage({ processedData, deviceType }) {
 
 export async function getServerSideProps(context) {
   const { req } = context;
-  return;
+  const pageData = [{}];
+  const processedData = processAPIData(pageData);
+  const deviceType = getDeviceType(req);
+  return {
+    props: { processedData, deviceType },
+  };
+
 }

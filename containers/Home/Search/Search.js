@@ -57,11 +57,13 @@ const HomeSearch = ({ searchTitleStyle, searchDescriptionStyle }) => {
           <Row>
             <Col span={11}></Col>
             <Col span={2}>
-              <Button type="primary" size="large">
-                <Link href={LOGIN_PAGE}>
-                  <a>ENTRAR</a>
-                </Link>
-              </Button>
+              <Link href={LOGIN_PAGE}>
+                <a>
+                  <Button type="primary" size="large">
+                    ENTRAR
+                  </Button>
+                </a>
+              </Link>
             </Col>
             <Col span={11}></Col>
           </Row>
