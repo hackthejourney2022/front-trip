@@ -96,6 +96,10 @@ export const SearchWrapper = styled.div`
     left: 30px;
   }
 
+  @media (min-width: 766px) and (max-width: 1368px) {
+    bottom: 300px;
+  }
+
   @media (max-width: 480px) {
     bottom: 200px;
     width: calc(100% - 30px);

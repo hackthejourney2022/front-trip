@@ -147,25 +147,16 @@ export default function SinglePostPage({ deviceType, query }) {
 
             </Col>
             <Col xl={8}>
-              {deviceType === 'desktop' ? (
-                <Sticky
-                  innerZ={999}
-                  activeClass="isSticky"
-                  top={202}
-                  bottomBoundary="#reviewSection"
-                >
+              <Sticky
+                innerZ={999}
+                activeClass="isSticky"
+                top={202}
+                bottomBoundary="#reviewSection"
+              >
 
-                  <HTitle>Visite e apoie uma ONG local:</HTitle>
-                  <Reservation data={data} />
-                </Sticky>
-              ) : (
-                <BottomReservation
-                  title={title}
-                  price={price}
-                  rating={rating}
-                  ratingCount={ratingCount}
-                />
-              )}
+                <HTitle>Visite e apoie uma ONG local:</HTitle>
+                <Reservation data={data} />
+              </Sticky>
             </Col>
           </Row>
           <Row gutter={30}>
