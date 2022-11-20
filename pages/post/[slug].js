@@ -65,7 +65,7 @@ export default function SinglePostPage({ deviceType, query }) {
 
 
   const getFlights = async (payload) => {
-    const receviedData = await axios.post('http://107.21.156.10:3000/shopping/summary-flights', payload)
+    const receviedData = await axios.post('http://18.215.117.48:3000/shopping/summary-flights', payload)
       .then(function (response) {
         // handle success
         setFlights(response.data)

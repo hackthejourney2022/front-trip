@@ -50,7 +50,7 @@ export default function ListingPage({ processedData, deviceType }) {
 
   useEffect(() => {
     const handleLoadMore = async () => {
-      const receviedData = await axios.get('http://107.21.156.10:3000/recommendation/flight?origin=SAO&departureDate=2022-12-20&oneWay=true')
+      const receviedData = await axios.get('http://18.215.117.48:3000/recommendation/flight?origin=SAO&departureDate=2022-12-20&oneWay=true')
         .then(function (response) {
           // handle success
           setData(response.data)
