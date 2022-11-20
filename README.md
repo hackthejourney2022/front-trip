@@ -34,11 +34,12 @@ Visto que este projeto se trata de um produto mínimo viável, optamos por integ
 
 > **Listagem de Recomendações** GET - /recommendation/flight
 > Está rota acessa nosso back-end que por sua vez utiliza dos seguintes serviços da Amadeus para compor o retorno deste payload:
+> <br>
 > ``` Amadeus Shopping Flight Destinations ```
 > ``` Amadeus Reference Data Locations ```
 > ``` Amadeus Safety Safety Rated Locations ```
 > ``` Amadeus Location Analytics Category Rated Areas ```
-<br>
+> <br>
 > **Voos mais baratos** POST - /shopping/summary-flights
 > Está rota acessa nosso back-end que por sua vez busca as ofertas de voos para o destino origem do nomade na data mais barata recomendada pela api de recomendações da AMADEUS:
 > ``` Amadeus Shopping Flight Offers Search ```
