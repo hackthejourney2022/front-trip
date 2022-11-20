@@ -120,6 +120,9 @@ export default function SinglePostPage({ deviceType, query }) {
                               "DD/MM/YYYY"
                             )}</span>  </Col>
                         </Row>
+                        <Button type="primary" size="large">
+                          Comprar
+                        </Button>
                       </Card>
                     })}
 

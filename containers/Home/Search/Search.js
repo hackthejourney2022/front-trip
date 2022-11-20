@@ -55,8 +55,8 @@ const HomeSearch = ({ searchTitleStyle, searchDescriptionStyle }) => {
       <Container>
         <SearchWrapper>
           <Row>
-            <Col span={11}></Col>
-            <Col span={2}>
+            <Col span={10}></Col>
+            <Col span={6}>
               <Link href={LOGIN_PAGE}>
                 <a>
                   <Button type="primary" size="large">
@@ -65,7 +65,6 @@ const HomeSearch = ({ searchTitleStyle, searchDescriptionStyle }) => {
                 </a>
               </Link>
             </Col>
-            <Col span={11}></Col>
           </Row>
           <Row></Row>
           <Row></Row>
