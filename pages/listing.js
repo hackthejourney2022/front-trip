@@ -6,6 +6,7 @@ import Toolbar from 'components/UI/Toolbar/Toolbar';
 import CategorySearch from 'containers/Listing/Search/CategorySearch/CategorySearch';
 import SectionGrid from 'components/SectionGrid/SectionGrid';
 import { PostPlaceholder } from 'components/UI/ContentLoader/ContentLoader';
+import Loader from 'components/Loader/Loader';
 import { SearchContext } from 'context/SearchProvider';
 import {
   paginator,
@@ -95,7 +96,7 @@ export default function ListingPage({ processedData, deviceType }) {
         />
       </Sticky>
 
-      <PostsWrapper className={columnCount}>
+      {data ? <PostsWrapper className={columnCount}>
         <SectionGrid
           link={SINGLE_POST_PAGE}
           columnWidth={columnWidth}
@@ -107,7 +108,7 @@ export default function ListingPage({ processedData, deviceType }) {
           handleLoadMore={handleLoadMore}
           placeholder={<PostPlaceholder />}
         />
-      </PostsWrapper>
+      </PostsWrapper> : <Loader />}
     </ListingWrapper>
   );
 }

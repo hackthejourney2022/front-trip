@@ -108,20 +108,20 @@ const AgentCreateOrUpdateForm = () => {
           <Col lg={12}>
             <FormSmall>O que é mais importante para mim na hora de escolher minha viagem.</FormSmall>
             <SpaceSwitch />
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Lugares amigáveis ao público LGBTQ</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Lugares com fácil acesso a atendimento médico</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Lugares com boa segurança pública</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Lugares com respeito a liberdade política</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Lugares seguros para mulheres</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Lugares amigáveis ao público LGBTQ</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Lugares com fácil acesso a atendimento médico</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Lugares com boa segurança pública</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Lugares com respeito a liberdade política</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Lugares seguros para mulheres</FormTextSwitch></TextSwitch>
           </Col>
           <Col lg={12}>
             <FormSmall>E o que você busca?</FormSmall>
             <SpaceSwitch />
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Paisagens de tirar o fôlego</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Opções de culinária variadas</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Opções de culinária Vegetariana / Vegana</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Muitas opções de lojas para compras</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Agitação na vida noturna</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Paisagens de tirar o fôlego</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Opções de culinária variadas</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Opções de culinária Vegetariana / Vegana</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Muitas opções de lojas para compras</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Agitação na vida noturna</FormTextSwitch></TextSwitch>
           </Col>
         </Row>
         <FormSubtitle>Agora conta um pouco mais sobre seu lado de voluntario(a)...</FormSubtitle>
@@ -129,13 +129,13 @@ const AgentCreateOrUpdateForm = () => {
           <Col lg={12}>
             <FormSmall>Qual tema de ações voluntárias você prefere?</FormSmall>
             <SpaceSwitch />
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Assistência Social</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Cultura</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Saúde</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Meio Ambiente</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Desenvolvimento e Defesa de Direitos Humanos</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Habitação</FormTextSwitch></TextSwitch>
-            <TextSwitch className='d-flex'><Switch defaultChecked /> <FormTextSwitch> Educação e pesquisa</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Assistência Social</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Cultura</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Saúde</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Meio Ambiente</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Desenvolvimento e Defesa de Direitos Humanos</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Habitação</FormTextSwitch></TextSwitch>
+            <TextSwitch className='d-flex'><Switch /> <FormTextSwitch> Educação e pesquisa</FormTextSwitch></TextSwitch>
 
           </Col>
         </Row>
