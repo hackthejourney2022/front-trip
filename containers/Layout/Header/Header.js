@@ -140,7 +140,7 @@ const Header = ({ router }) => {
                 <IoIosClose />
               </button>
             </CloseDrawer>
-            {loggedIn ? (
+            {loggedIn && (
               <AvatarWrapper>
                 <AvatarImage>
                   <Logo src={avatarImg} />
@@ -151,11 +151,9 @@ const Header = ({ router }) => {
                     <a>View Profile</a>
                   </Link>
                 </AvatarInfo>
-              </AvatarWrapper>
-            ) : (
-              <AuthMenu className="auth-menu" />
-            )}
-            <MobileMenu className="main-menu" />
+              </AvatarWrapper>)}
+
+            < MobileMenu className="main-menu" />
           </Drawer>
         </MobileNavbar>
       </Sticky>
